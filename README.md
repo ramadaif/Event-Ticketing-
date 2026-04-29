@@ -91,7 +91,7 @@ The Event Ticketing Platform solves these problems by:
 
 ---
 
-**Members 4, 5, 6 – Core Development Team**
+**Abd elrahman gaber , Karim Mohamed Mostafa , Youssef Shaker – Core Development Team**
 
 * Implement main application logic
 * Build classes: User, Event, Ticket, Booking
