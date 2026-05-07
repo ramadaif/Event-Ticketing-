@@ -1,0 +1,123 @@
+#ifndef REGISTER_H
+#define REGISTER_H
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Register {
+
+private:
+
+    struct User {
+        string name;
+        string email;
+        string password;
+
+        User(string n, string e, string p) {
+            name = n;
+            email = e;
+            password = p;
+        }
+    };
+
+    struct Node {
+        User data;
+        Node* next;
+
+        Node(User u) : data(u), next(nullptr) {}
+    };
+
+    Node* head = nullptr;
+
+public:
+
+ 
+    Register() : head(nullptr) {}
+
+
+    ~Register() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+        head = nullptr;
+    }
+
+  
+    void registerUser() {
+
+        string name, email, pass;
+
+        cin.ignore();
+
+        cout << "Enter Name: ";
+        getline(cin, name);
+
+        cout << "Enter Email: ";
+        getline(cin, email);
+
+        cout << "Enter Password: ";
+        getline(cin, pass);
+
+        if (name.empty() || email.empty() || pass.empty()) {
+            cout << " Invalid input\n";
+            return;
+        }
+
+        User u(name, email, pass);
+        Node* newNode = new Node(u);
+
+        if (head == nullptr) {
+            head = newNode;
+        }
+        else {
+            Node* temp = head;
+            while (temp->next != nullptr) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
+
+        cout << " Account created successfully!\n";
+    }
+
+   
+    bool login(string email, string password) {
+
+        Node* temp = head;
+
+        while (temp != nullptr) {
+            if (temp->data.email == email &&
+                temp->data.password == password) {
+
+                cout << " Login successful\n";
+                return true;
+            }
+
+            temp = temp->next;
+        }
+
+        cout << " Invalid credentials\n";
+        return false;
+    }
+
+    
+    void displayUsers() {
+
+        Node* temp = head;
+
+        cout << "\n--- Users ---\n";
+
+        while (temp != nullptr) {
+            cout << temp->data.name << " | "
+                << temp->data.email << endl;
+
+            temp = temp->next;
+        }
+    }
+};
+
+#endif
