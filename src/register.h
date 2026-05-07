@@ -36,15 +36,18 @@ public:
     Register() : head(nullptr) {}
 
 
-    ~Register() {
-        Node* current = head;
-        while (current != nullptr) {
-            Node* next = current->next;
-            delete current;
-            current = next;
-        }
-        head = nullptr;
+~Register() {
+
+    Node* temp;
+
+    while (head != nullptr) {
+        temp = head;
+        head = head->next;
+        delete temp;
     }
+
+    cout << "Memory cleared\n";
+}
 
   
     void registerUser() {
