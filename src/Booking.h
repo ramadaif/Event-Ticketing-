@@ -1,4 +1,4 @@
-ifndef BOOKING_H
+#ifndef BOOKING_H
 #define BOOKING_H
 
 #include <iostream>
@@ -91,4 +91,4 @@ public:
     }
 };
 
-#endif//
+#endif
