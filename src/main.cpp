@@ -1,8 +1,11 @@
 #include <iostream>
 #include "register.h"
+#include "Booking.h"
 
 
 using namespace std;
+Booking bookingSystem; 
+string loggedInUser; 
 
 void eventMenu() {
 
@@ -10,32 +13,55 @@ void eventMenu() {
 
     do {
         cout << "\n===== EVENT MENU =====\n";
-        cout << "3. Browse Events\n";
-        cout << "4. Search for Events\n";
-        cout << "5. Logout\n";
+        cout << "1. Browse Events\n";
+        cout << "2. Search for Events\n";
+         cout << "3. Book an Event\n";      
+        cout << "4. View My Bookings\n";   
+        cout << "5. Cancel Booking\n"; 
+        cout << "6. Logout\n";
 
         cout << "Enter choice: ";
         cin >> choice;
 
         switch (choice) {
 
-        case 3:
+        case 1:
             cout << " Showing all events...\n";
             break;
 
-        case 4:
+        case 2:
             cout << " Searching events...\n";
             break;
 
-        case 5:
-            cout << " Logged out\n";
+        case 3: {
+              string eventName;
+            cout << "Enter event name: ";
+            cin.ignore();
+            getline(cin, eventName);
+            bookingSystem.bookEvent(loggedInUser, eventName);
             break;
-
+        }
+        case 4: 
+             bookingSystem.viewBookings(loggedInUser);
+            break;
+        case 5: {
+            int id;
+            cout << "Enter Booking ID to cancel: ";
+            cin >> id;
+            bookingSystem.cancelBooking(id);
+            break;
+        
+        }
+        case 6:
+             cout << " Logged out\n";
+            break;
+            
+        
         default:
             cout << "Invalid choice \n";
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 }
 
 int main() {
