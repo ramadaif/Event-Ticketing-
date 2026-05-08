@@ -1,65 +1,70 @@
-#include <iostream>
+ #include <iostream>
 #include "register.h"
 #include "Booking.h"
 
 using namespace std;
-
 Booking bookingSystem; 
 string loggedInUser; 
 
 void eventMenu() {
+
     int choice;
 
     do {
         cout << "\n===== EVENT MENU =====\n";
-        cout << "1. Browse Events\n";
-        cout << "2. Search for Events\n";
-        cout << "3. Book an Event\n";      
-        cout << "4. View My Bookings\n";   
-        cout << "5. Cancel Booking\n"; 
-        cout << "6. Logout\n";
+        cout << "3. Browse Events\n";
+        cout << "4. Search for Events\n";
+         cout << "5. Book an Event\n";      
+        cout << "6. View My Bookings\n";   
+        cout << "7. Cancel Booking\n"; 
+        cout << "8. Logout\n";
+
         cout << "Enter choice: ";
         cin >> choice;
 
         switch (choice) {
-            case 1:
-                cout << "Showing all events...\n";
-                break;
 
-            case 2:
-                cout << "Searching events...\n";
-                break;
+        case 3:
+            cout << " Showing all events...\n";
+            break;
 
-            case 3: {
-                string eventName;
-                cout << "Enter event name: ";
-                cin.ignore();
-                getline(cin, eventName);
-                bookingSystem.bookEvent(loggedInUser, eventName);
-                break;
-            }
-            case 4: 
-                bookingSystem.viewBookings(loggedInUser);
-                break;
-            case 5: {
-                int id;
-                cout << "Enter Booking ID to cancel: ";
-                cin >> id;
-                bookingSystem.cancelBooking(id);
-                break;
-            }
-            case 6:
-                cout << "Logged out\n";
-                break;
-                
-            default:
-                cout << "Invalid choice\n";
+        case 4:
+            cout << " Searching events...\n";
+            break;
+
+        case 5: {
+              string eventName;
+            cout << "Enter event name: ";
+            cin.ignore();
+            getline(cin, eventName);
+            bookingSystem.bookEvent(loggedInUser, eventName);
+            break;
         }
-    } while (choice != 6);
+        case 6: 
+             bookingSystem.viewBookings(loggedInUser);
+            break;
+        case 7: {
+            int id;
+            cout << "Enter Booking ID to cancel: ";
+            cin >> id;
+            bookingSystem.cancelBooking(id);
+            break;
+        
+        }
+        case 8:
+             cout << " Logged out\n";
+            break;
+            
+        
+        default:
+            cout << "Invalid choice \n";
+        }
+
+    } while (choice != 8);
 }
 
 int main() {
-    cout << "Event Ticketing System Running\n";
+    std::cout << "Event Ticketing System Running\n";
 
     Register r;
     int choice;
@@ -68,53 +73,44 @@ int main() {
         cout << "\n===== MAIN MENU =====\n";
         cout << "1. Register\n";
         cout << "2. Login\n";
-        cout << "3. Admin Login\n";
-        cout << "4. Exit\n";
+        cout << "3. Exit\n";
+
         cout << "Enter choice: ";
         cin >> choice;
 
         switch (choice) {
-            case 1:
-                r.registerUser();
-                break;
 
-            case 2: {
-                string email, pass;
-                cout << "Email: ";
-                cin >> email;
-                cout << "Password: ";
-                cin >> pass;
+        case 1:
+            r.registerUser();
+            break;
 
-                if (r.login(email, pass)) {
-                    loggedInUser = email;  
-                    eventMenu();  
-                }
-                break;
+        case 2: {
+            string email, pass;
+
+            cout << "Email: ";
+            cin >> email;
+
+            cout << "Password: ";
+            cin >> pass;
+
+            bool success = r.login(email, pass);
+
+            if (success) {
+                eventMenu(); 
             }
 
-            case 3: {
-                string adminEmail, adminPass;
-                cout << "Admin Email: ";
-                cin >> adminEmail;
-                cout << "Admin Password: ";
-                cin >> adminPass;
-                
-                if (adminEmail == "admin@system.com" && adminPass == "admin123") {
-                    cout << "Admin Menu - Add events functionality here\n";
-                } else {
-                    cout << "Invalid admin credentials!\n";
-                }
-                break;
-            }
-                
-            case 4:
-                cout << "Bye!\n";
-                break;
-                
-            default:
-                cout << "Invalid choice.\n";
+            break;
         }
-    } while (choice != 4);
+
+        case 3:
+            cout << "Bye \n";
+            break;
+
+        default:
+            cout << "Invalid choice \n";
+        }
+
+    } while (choice != 3);
 
     return 0;
 }
