@@ -25,7 +25,7 @@ private:
         User data;
         Node* next;
 
-        Node(User u) : data(u), next(nullptr) {}
+         
     };
 
     Node* head = nullptr;
@@ -50,6 +50,8 @@ public:
 }
 
   
+=======
+    // 1. Register (from backlog)
     void registerUser() {
 
         string name, email, pass;
@@ -65,11 +67,13 @@ public:
         cout << "Enter Password: ";
         getline(cin, pass);
 
+        // validation
         if (name.empty() || email.empty() || pass.empty()) {
             cout << " Invalid input\n";
             return;
         }
 
+        
         User u(name, email, pass);
         Node* newNode = new Node(u);
 
@@ -87,7 +91,7 @@ public:
         cout << " Account created successfully!\n";
     }
 
-   
+    // 2. Login (from backlog)
     bool login(string email, string password) {
 
         Node* temp = head;
@@ -105,9 +109,23 @@ public:
 
         cout << " Invalid credentials\n";
         return false;
+        ~Register() {
+
+            Node* temp;
+
+            while (head != nullptr) {
+                temp = head;
+                head = head->next;
+                delete temp;
+            }
+
+            cout << "list cleared\n";
+        }
+    
+    
     }
 
-    
+   
     void displayUsers() {
 
         Node* temp = head;
