@@ -46,8 +46,7 @@ public:
         delete temp;
     }
 
-    cout << "list cleared\n";
-}
+    cout << "Memory cleared\n";
 
   
 =======
