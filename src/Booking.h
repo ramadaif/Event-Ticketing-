@@ -11,11 +11,17 @@ private:
         string userName;
         string eventName;
         int bookingID;
+        int ticketCount;
+        double totalPrice;
+        string status;
 
-        BookingRecord(string name, string event, int id) {
+        BookingRecord(string name, string event, int id, int tickets = 1) {
             userName = name;
             eventName = event;
             bookingID = id;
+            ticketCount = tickets;
+            totalPrice = 0.0;
+            status = "Confirmed";
         }
     };
 
@@ -55,15 +61,26 @@ public:
         cout << " Booking confirmed! ID: " << record.bookingID << "\n";
     }
 
-void Booking::calculate_total(double price_per_ticket) {
-    total_price = ticket_count * price_per_ticket;
-}
+    void calculateTotal(double price_per_ticket) {
+        Node* temp = head;
+        while (temp != nullptr) {
+            temp->data.totalPrice = temp->data.ticketCount * price_per_ticket;
+            temp = temp->next;
+        }
+    }
 
-void Booking::update_status(std::string new_status) {
-    status = new_status;
-}
-
-int getUserId() const { return userId; }
+    void updateStatus(int bookingID, string new_status) {
+        Node* temp = head;
+        while (temp != nullptr) {
+            if (temp->data.bookingID == bookingID) {
+                temp->data.status = new_status;
+                cout << " Booking status updated to: " << new_status << "\n";
+                return;
+            }
+            temp = temp->next;
+        }
+        cout << " Booking ID not found.\n";
+    }
 
     void viewBookings(string userName) {
         Node* temp = head;
@@ -72,7 +89,10 @@ int getUserId() const { return userId; }
         while (temp != nullptr) {
             if (temp->data.userName == userName) {
                 cout << "ID: " << temp->data.bookingID
-                     << " | Event: " << temp->data.eventName << "\n";
+                     << " | Event: " << temp->data.eventName
+                     << " | Tickets: " << temp->data.ticketCount
+                     << " | Total: $" << temp->data.totalPrice
+                     << " | Status: " << temp->data.status << "\n";
                 found = true;
             }
             temp = temp->next;
@@ -98,6 +118,10 @@ int getUserId() const { return userId; }
             temp = temp->next;
         }
         cout << " Booking ID not found.\n";
+    }
+
+    int getNextID() const {
+        return nextID;
     }
 };
 
