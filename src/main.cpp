@@ -1,6 +1,7 @@
 #include <iostream>
 #include "register.h"
 #include "Booking.h"
+#include "TicketManager.h"
 
 
 using namespace std;
@@ -68,13 +69,15 @@ int main() {
     std::cout << "Event Ticketing System Running\n";
 
     Register r;
+    TicketManager tm;
     int choice;
 
     do {
         cout << "\n===== MAIN MENU =====\n";
         cout << "1. Register\n";
         cout << "2. Login\n";
-        cout << "3. Exit\n";
+        cout << "3. Admin Login\n";
+        cout << "4. Exit\n";
 
         cout << "Enter choice: ";
         cin >> choice;
@@ -94,24 +97,27 @@ int main() {
             cout << "Password: ";
             cin >> pass;
 
-            bool success = r.login(email, pass);
-
-            if (success) {
-                eventMenu(); 
-            }
-
+             if (r.login(email, pass))
+                tm.userMenu(email);
             break;
+
+             
+            
         }
 
         case 3:
-            cout << "Bye \n";
+              tm.adminMenu();
             break;
-
+        case 4:
+             cout << "Bye!\n";
+            break;
         default:
-            cout << "Invalid choice \n";
+            cout << "Invalid choice.\n";
         }
 
-    } while (choice != 3);
+        
+
+    } while (choice != 4);
 
     return 0;
 }
