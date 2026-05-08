@@ -32,24 +32,6 @@ private:
 
 public:
 
- 
-    Register() : head(nullptr) {}
-
-
-~Register() {
-
-    Node* temp;
-
-    while (head != nullptr) {
-        temp = head;
-        head = head->next;
-        delete temp;
-    }
-
-    cout << "Memory cleared\n";
-
-  
-=======
     // 1. Register (from backlog)
     void registerUser() {
 
