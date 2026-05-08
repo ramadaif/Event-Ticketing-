@@ -55,6 +55,16 @@ public:
         cout << " Booking confirmed! ID: " << record.bookingID << "\n";
     }
 
+void Booking::calculate_total(double price_per_ticket) {
+    total_price = ticket_count * price_per_ticket;
+}
+
+void Booking::update_status(std::string new_status) {
+    status = new_status;
+}
+
+int getUserId() const { return userId; }
+
     void viewBookings(string userName) {
         Node* temp = head;
         bool found = false;
