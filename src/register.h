@@ -31,6 +31,7 @@ private:
     Node* head = nullptr;
 
 public:
+ Register() : head(nullptr) {}
 
     // 1. Register (from backlog)
     void registerUser() {
@@ -92,17 +93,18 @@ public:
         return false;
         ~Register() {
 
-            Node* temp;
+        Node* temp;
 
-            while (head != nullptr) {
-                temp = head;
-                head = head->next;
-                delete temp;
-            }
-
-            cout << "list cleared\n";
+        while (head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
         }
-    
+
+        cout << "List cleared\n";
+    }
+     Register(const Register&) = delete;
+    Register& operator=(const Register&) = delete;
     
     }
 
