@@ -22,15 +22,17 @@ private:
     };
 
     struct Node {
-        User data;
-        Node* next;
+    User data;
+    Node* next;
 
-         
-    };
+    Node(const User& u) : data(u), next(nullptr) {}
+};
 
     Node* head = nullptr;
 
 public:
+Register(const Register&) = delete;
+Register& operator=(const Register&) = delete;
 
     // 1. Register (from backlog)
     void registerUser() {
