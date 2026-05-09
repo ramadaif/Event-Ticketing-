@@ -32,6 +32,17 @@ private:
 
 public:
 
+    Register() : head(nullptr) {}
+    
+~Register() {
+        Node* temp;
+        while (head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+        cout << "List cleared\n";
+    }
     // 1. Register (from backlog)
     void registerUser() {
 
@@ -90,18 +101,6 @@ public:
 
         cout << " Invalid credentials\n";
         return false;
-        ~Register() {
-
-            Node* temp;
-
-            while (head != nullptr) {
-                temp = head;
-                head = head->next;
-                delete temp;
-            }
-
-            cout << "list cleared\n";
-        }
     
     
     }
