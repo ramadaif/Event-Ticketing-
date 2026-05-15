@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Register {
@@ -23,9 +24,9 @@ private:
 
     struct Node {
         User data;
-        Node* next;
+        Node* next = nullptr;
 
-         
+        explicit Node(const User& u) : data(u) {}
     };
 
     Node* head = nullptr;
@@ -33,25 +34,26 @@ private:
 public:
  Register() : head(nullptr) {}
 
- 
-    Register() : head(nullptr) {}
+    Register() = default;
 
+    ~Register() {
 
-~Register() {
+        Node* temp;
 
-    Node* temp;
+        while (head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
 
-    while (head != nullptr) {
-        temp = head;
-        head = head->next;
-        delete temp;
+        cout << "List cleared\n";
     }
 
-    cout << "Memory cleared\n";
+    // منع النسخ
+    Register(const Register&) = delete;
+    Register& operator=(const Register&) = delete;
 
-  
-=======
-    // 1. Register (from backlog)
+    // 1. Register
     void registerUser() {
 
         string name, email, pass;
@@ -69,11 +71,10 @@ public:
 
         // validation
         if (name.empty() || email.empty() || pass.empty()) {
-            cout << " Invalid input\n";
+            cout << "Invalid input\n";
             return;
         }
 
-        
         User u(name, email, pass);
         Node* newNode = new Node(u);
 
@@ -81,34 +82,39 @@ public:
             head = newNode;
         }
         else {
+
             Node* temp = head;
+
             while (temp->next != nullptr) {
                 temp = temp->next;
             }
+
             temp->next = newNode;
         }
 
-        cout << " Account created successfully!\n";
+        cout << "Account created successfully!\n";
     }
 
-    // 2. Login (from backlog)
+    // 2. Login
     bool login(string email, string password) {
 
         Node* temp = head;
 
         while (temp != nullptr) {
+
             if (temp->data.email == email &&
                 temp->data.password == password) {
 
-                cout << " Login successful\n";
+                cout << "Login successful\n";
                 return true;
             }
 
             temp = temp->next;
         }
 
-        cout << " Invalid credentials\n";
+        cout << "Invalid credentials\n";
         return false;
+ HEAD
         ~Register() {
 
         Node* temp;
@@ -124,9 +130,10 @@ public:
      Register(const Register&) = delete;
     Register& operator=(const Register&) = delete;
     
+ main
     }
 
-   
+    // Display users
     void displayUsers() {
 
         Node* temp = head;
@@ -134,8 +141,11 @@ public:
         cout << "\n--- Users ---\n";
 
         while (temp != nullptr) {
-            cout << temp->data.name << " | "
-                << temp->data.email << endl;
+
+            cout << temp->data.name
+                 << " | "
+                 << temp->data.email
+                 << endl;
 
             temp = temp->next;
         }
