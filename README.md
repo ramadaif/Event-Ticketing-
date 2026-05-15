@@ -83,7 +83,7 @@ The Event Ticketing Platform solves these problems by:
 
 ---
 
-** Hana Ali – Code Quality & SonarQube Analysis**
+** Mahmoud El Sonbaty – Code Quality & SonarQube Analysis**
 
 * Generate SonarQube Quality Report
 * Identify and document code smells
@@ -100,7 +100,7 @@ The Event Ticketing Platform solves these problems by:
 
 ---
 
-**Mahmoud Mostafa Elsonbaty – Sprint Planning & Presentation**
+**Hana Ali – Sprint Planning & Presentation**
 
 * Create Sprint Plans (minimum 3 sprints)
 * Define goals, stories, and effort estimates
