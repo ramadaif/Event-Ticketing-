@@ -31,6 +31,10 @@ private:
     }
     
 public:
+    User() {
+        count = 0;
+    }
+    
     bool registerUser() {
         if (count >= MAX_USERS) {
             cout << "System is full.\n";
@@ -91,7 +95,7 @@ public:
             return;
         }
         for (int i = 0; i < count; i++) {
-            cout << users[i].name << " | " << users[i].email << "\n";
+            cout << "Name: " << users[i].name << " | Email: " << users[i].email << "\n";
         }
     }
     
@@ -101,13 +105,17 @@ public:
                 string newName, newPassword;
                 cin.ignore();
                 cout << "\n--- Edit Profile ---\n";
-                cout << "New name (leave empty to keep): ";
+                cout << "New name (leave empty to keep current): ";
                 getline(cin, newName);
-                cout << "New password (leave empty to keep): ";
+                cout << "New password (leave empty to keep current): ";
                 getline(cin, newPassword);
                 
-                if (!newName.empty()) users[i].name = newName;
-                if (!newPassword.empty()) users[i].password = newPassword;
+                if (!newName.empty()) {
+                    users[i].name = newName;
+                }
+                if (!newPassword.empty()) {
+                    users[i].password = newPassword;
+                }
                 
                 cout << "Profile updated successfully!\n";
                 return;
