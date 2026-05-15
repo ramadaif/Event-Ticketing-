@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Register {
@@ -23,24 +24,21 @@ private:
 
     struct Node {
         User data;
-        Node* next;
+        Node* next = nullptr;
 
-        Node(const User& u) : data(u), next(nullptr) {}
+        explicit Node(const User& u) : data(u) {}
     };
 
     Node* head = nullptr;
 
 public:
 
-    Register() : head(nullptr) {}
- HEAD
+    Register() = default;
 
     ~Register() {
 
-        Node* temp
-    
-~Register() {
         Node* temp;
+
         while (head != nullptr) {
             temp = head;
             head = head->next;
@@ -50,10 +48,11 @@ public:
         cout << "List cleared\n";
     }
 
+    // منع النسخ
+    Register(const Register&) = delete;
+    Register& operator=(const Register&) = delete;
+
     // 1. Register
-        cout << "List cleared\n";
-    }
-    // 1. Register (from backlog)
     void registerUser() {
 
         string name, email, pass;
@@ -82,6 +81,7 @@ public:
             head = newNode;
         }
         else {
+
             Node* temp = head;
 
             while (temp->next != nullptr) {
@@ -115,6 +115,7 @@ public:
         return false;
     }
 
+    // Display users
     void displayUsers() {
 
         Node* temp = head;
@@ -123,8 +124,10 @@ public:
 
         while (temp != nullptr) {
 
-            cout << temp->data.name << " | "
-                 << temp->data.email << endl;
+            cout << temp->data.name
+                 << " | "
+                 << temp->data.email
+                 << endl;
 
             temp = temp->next;
         }
