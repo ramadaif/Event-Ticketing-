@@ -33,11 +33,14 @@ private:
 public:
 
     Register() : head(nullptr) {}
+ HEAD
 
     ~Register() {
 
+        Node* temp
+    
+~Register() {
         Node* temp;
-
         while (head != nullptr) {
             temp = head;
             head = head->next;
@@ -48,6 +51,9 @@ public:
     }
 
     // 1. Register
+        cout << "List cleared\n";
+    }
+    // 1. Register (from backlog)
     void registerUser() {
 
         string name, email, pass;
