@@ -32,6 +32,7 @@ private:
     Node* head = nullptr;
 
 public:
+ Register() : head(nullptr) {}
 
     Register() = default;
 
@@ -113,6 +114,23 @@ public:
 
         cout << "Invalid credentials\n";
         return false;
+ HEAD
+        ~Register() {
+
+        Node* temp;
+
+        while (head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+
+        cout << "List cleared\n";
+    }
+     Register(const Register&) = delete;
+    Register& operator=(const Register&) = delete;
+    
+ main
     }
 
     // Display users
