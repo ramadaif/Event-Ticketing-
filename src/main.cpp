@@ -1,10 +1,10 @@
- #include <iostream>
+#include <iostream>
 #include "register.h"
-#include "Booking.h"
-
+#include "TicketManager.h"
 using namespace std;
-Booking bookingSystem; 
-string loggedInUser; 
+Register r;
+TicketManager tm;
+string loggedInUser;
 
 void eventMenu() {
 
@@ -86,19 +86,22 @@ int main() {
 
         case 2: {
             string email, pass;
-
             cout << "Email: ";
             cin >> email;
-
             cout << "Password: ";
             cin >> pass;
 
             bool success = r.login(email, pass);
 
             if (success) {
-                eventMenu(); 
-            }
+                loggedInUser = email;
 
+                if (email == "admin@admin.com") {
+                    tm.adminMenu();
+                } else {
+                    tm.userMenu(loggedInUser);
+                }
+            }
             break;
         }
 
